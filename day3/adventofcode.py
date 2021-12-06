@@ -1,7 +1,7 @@
 import pandas as pd
 
 ##3a
-df = pd.read_csv('day3/adventofcode3.txt', header=None)
+df = pd.read_csv('day3/adventofcode3.txt', header=None, dtype=str)
 
 digits = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 for ix, row in df.iterrows():
@@ -18,10 +18,10 @@ for k, l in enumerate(gamma):
         gamma[k] = 0
         epsilon[k] = 1
 
-    gmm = int(''.join([str(i) for i in gamma]), 2)
-    eps = int(''.join([str(i) for i in epsilon]), 2)
+gmm = int(''.join([str(i) for i in gamma]), 2)
+eps = int(''.join([str(i) for i in epsilon]), 2)
 
-    ans_3a = gmm * eps
+ans_3a = gmm * eps
 
 ##3b
 ox = df[0].copy().to_list()
@@ -55,3 +55,12 @@ while len(co2) > 1:
         co2 = [rows for rows in co2 if rows[i] == '0']
         print(co2)
     i += 1
+
+o2 = int(''.join([str(i) for i in ox]), 2)
+co = int(''.join([str(i) for i in co2]), 2)
+
+ans_3b = o2 * co
+
+if __name__ == "__main__":
+    print('Answer 3a:', ans_3a)
+    print('Answer 3b:', ans_3b)

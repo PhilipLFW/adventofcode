@@ -44,3 +44,7 @@ while len(bingo_cards) > 1:
     ix += 1
 print(f'The BIG loser is: {remaining_players}')
 ans_4b = sum(sum(bingo_cards[0][:5], [])) * next
+
+if __name__ == "__main__":
+    print('Answer 4a:', ans_4a)
+    print('Answer 4b:', ans_4b)

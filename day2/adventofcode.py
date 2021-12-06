@@ -24,3 +24,7 @@ for i, row in df.iterrows():
     if instr == 'down':
         position[2] += int(pos)
 ans_2b = (position[0] * position[1])
+
+if __name__ == "__main__":
+    print('Answer 2a:', ans_2a)
+    print('Answer 2b:', ans_2b)
