@@ -1,6 +1,6 @@
 import pandas as pd
 ##2a
-df = pd.read_csv('adventofcode2.csv', header=None)
+df = pd.read_csv('day2/adventofcode2.csv', header=None)
 position = [0, 0]
 for i, row in df.iterrows():
     instr, pos = row[0].split(' ')
