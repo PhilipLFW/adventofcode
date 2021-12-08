@@ -14,8 +14,9 @@ ME MORE THAN IT HELPED ME BUT IT LED TO THE FOLLOWING SOLUTION. SCROLL DOWN FOR 
 # ## 7b
 # # Fuel burned is 1+2+3+...+n, or as Gauss says n(n+1)/2, or (n^2 + n) / 2 --> basically optimizing the quadratic distance
 # # Least squares tells us we optimize quadratic distance by the mean
-# dist = [abs(crab - np.floor(np.mean(data))) for crab in data]
-# ans_7b = sum([(n+1)*n/2 for n in dist])
+# dist1 = [abs(crab - np.floor(np.mean(data))) for crab in data]
+# dist2 = [abs(crab - np.ceil(np.mean(data))) for crab in data]
+# ans_7b = min(sum([(n+1)*n/2 for n in dist1]), sum([(n+1)*n/2 for n in dist2]))
 
 ## 7a
 minimum = 1e16
