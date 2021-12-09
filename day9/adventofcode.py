@@ -13,11 +13,9 @@ low_points = []
 for i in range(1,len(data)-1):
     for j in range(1,len(data[0])-1):
         point = data[i][j]
-        print(point)
         adjacent_points = [data[i][j+1], data[i+1][j], data[i-1][j], data[i][j-1]]
-        print(adjacent_points)
         if all([point < adj for adj in adjacent_points]):
-            print('low point!')
+            print('We found a low point!', (i,j))
             low_points += [(i, j)]
             risk += 1 + int(point)
 ans_9a = risk
