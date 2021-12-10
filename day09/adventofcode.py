@@ -22,7 +22,7 @@ ans_9a = risk
 
 ## 9b
 explore_data = data.copy()
-basin_sizes_dict = {p: [] for p in low_points}
+basin_sizes_dict = {p: 0 for p in low_points}
 for point in low_points:
     this_basin = {point}
     print('Low point:', this_basin)
