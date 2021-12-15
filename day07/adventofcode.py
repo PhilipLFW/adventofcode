@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 
-with open('day7/adventofcode7.txt', 'r') as f:
+with open('day07/adventofcode7.txt', 'r') as f:
     raw = f.readline()
     data = [int(crab) for crab in raw.split(',')]
 

@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 
-with open('day8/adventofcode8.txt', 'r') as f:
+with open('day08/adventofcode8.txt', 'r') as f:
     raw = f.readlines()
     data = [txt.replace('\n', '') for txt in raw]
 

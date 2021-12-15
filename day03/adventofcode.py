@@ -1,7 +1,7 @@
 import pandas as pd
 
 ##3a
-df = pd.read_csv('day3/adventofcode3.txt', header=None, dtype=str)
+df = pd.read_csv('day03/adventofcode3.txt', header=None, dtype=str)
 
 digits = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 for ix, row in df.iterrows():

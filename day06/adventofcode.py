@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 
-with open('adventofcode6.txt', 'r') as f:
+with open('day06/adventofcode6.txt', 'r') as f:
     raw = f.readline()
     fish_init = [int(txt) for txt in raw.split(',')]
 

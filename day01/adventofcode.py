@@ -1,6 +1,6 @@
 import pandas as pd
 ##1a
-data = pd.read_csv('day1/adventofcode.csv', header=None)
+data = pd.read_csv('day01/adventofcode.csv', header=None)
 ans_1a = (data - data.shift()>0).sum()
 
 ##1b

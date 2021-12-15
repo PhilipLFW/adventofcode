@@ -1,6 +1,6 @@
 import numpy as np
 
-with open('day5/adventofcode5.txt', 'r') as f:
+with open('day05/adventofcode5.txt', 'r') as f:
     raw = f.readlines()
     lines = [txt.replace('\n', '').split(' -> ') for txt in raw]
 

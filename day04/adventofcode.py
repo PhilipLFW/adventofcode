@@ -1,6 +1,6 @@
 import numpy as np
 
-with open('day4/adventofcode4.txt', 'r') as f:
+with open('day04/adventofcode4.txt', 'r') as f:
     raw = f.readlines()
     text = sum([[int(nmbrs) for nmbrs in txt.replace('\n', '').split()] for txt in raw if txt != '\n'], [])
 bingo_cards_rows = np.reshape(text, (100,5,5)).tolist()

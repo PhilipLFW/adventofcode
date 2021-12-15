@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 
-with open('day9/adventofcode9.txt', 'r') as f:
+with open('day09/adventofcode9.txt', 'r') as f:
     raw = f.readlines()
     data = ['9' + txt.replace('\n', '') + '9' for txt in raw]
     data.insert(0, '9' * len(data[0]))
