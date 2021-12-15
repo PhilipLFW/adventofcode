@@ -15,18 +15,18 @@ def get_distance_graph(grid):
                     dists[h * rows + v, (h + i) * rows + (v + j)] = grid[h + i, v + j]
     return csr_matrix(dists)
 
+## 15a
 graph = get_distance_graph(grid)
 dist = shortest_path(graph, directed=True, indices=0)  # shortest path from (0,0) to any point on the grid
-
-## 15a
-ans_15a = dist[-1]
+ans_15a = dist[-1]  # shortest path to end point
 
 ## 15b
 tiles = np.tile(np.repeat([0,1,2,3,4], grid.shape[0]), (grid.shape[0]*5, 1))
 new_grid = (np.tile(grid, (5,5)) + tiles + tiles.T - 1) % 9 + 1
+
 graph = get_distance_graph(new_grid)
 dist = shortest_path(graph, directed=True, indices=0)  # shortest path from (0,0) to any point on the grid
-ans_15b = dist[-1]
+ans_15b = dist[-1]  # shortest path to end point
 
 if __name__ == "__main__":
     print('Answer 15a:', ans_15a)

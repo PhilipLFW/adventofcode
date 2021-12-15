@@ -1,14 +1,10 @@
 import pandas as pd
 import numpy as np
 
-with open('day11/adventofcode11.txt', 'r') as f:
-    raw = f.readlines()
-    octo = np.array([[int (char) for char in chars]
-                     for chars in [list(line)
-                                   for line in [txt.replace('\n', '')
-                                                for txt in raw]]])
+octo = np.genfromtxt("day11/adventofcode11.txt", delimiter=1, dtype=int)
 
-def flashing_octo_single_step(octo, step):
+
+def flashing_octo_single_step(octo):
     flashed = set()
     add = np.ones_like(octo)
     while sum(sum(add)) >= 1:
@@ -30,7 +26,7 @@ def flashing_octo_single_step(octo, step):
 flashed_octo = 0
 octo_a = octo.copy()
 for step in range(100):
-    octo_a, n_flashed = flashing_octo_single_step(octo_a, step)
+    octo_a, n_flashed = flashing_octo_single_step(octo_a)
     flashed_octo += n_flashed
     print(f'After step {step + 1} ({flashed_octo} flashed):\n', octo_a)
 
@@ -40,7 +36,7 @@ ans_11a = flashed_octo
 step = 0
 octo_b = octo.copy()
 while not np.all(octo_b==0):
-    octo_b, _ = flashing_octo_single_step(octo_b, step)
+    octo_b, _ = flashing_octo_single_step(octo_b)
     step += 1
 
 ans_11b = step
