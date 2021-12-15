@@ -2,12 +2,8 @@ import numpy as np
 from scipy.sparse import csr_matrix, lil_matrix
 from scipy.sparse.csgraph import shortest_path
 
-with open('day15/adventofcode15.txt', 'r') as f:
-    raw = f.readlines()
-    grid = np.array([[int(char) for char in chars]
-              for chars in [list(line)
-                            for line in [txt.replace('\n', '')
-                                         for txt in raw]]])
+grid = np.genfromtxt("day15/adventofcode15.txt", delimiter=1, dtype=int)
+
 def get_distance_graph(grid):
     rows, cols = grid.shape
     dists = lil_matrix((rows*cols, rows*cols))
@@ -26,11 +22,8 @@ dist = shortest_path(graph, directed=True, indices=0)  # shortest path from (0,0
 ans_15a = dist[-1]
 
 ## 15b
-new_grid = (np.concatenate((np.concatenate((grid, grid+1, grid+2, grid+3, grid+4)),
-np.concatenate((grid+1, grid+2, grid+3, grid+4, grid+5)),
-np.concatenate((grid+2, grid+3, grid+4, grid+5, grid+6)),
-np.concatenate((grid+3, grid+4, grid+5, grid+6, grid+7)),
-np.concatenate((grid+4, grid+5, grid+6, grid+7, grid+8))), axis=1) - 1) % 9 + 1
+tiles = np.tile(np.repeat([0,1,2,3,4], grid.shape[0]), (grid.shape[0]*5, 1))
+new_grid = (np.tile(grid, (5,5)) + tiles + tiles.T - 1) % 9 + 1
 graph = get_distance_graph(new_grid)
 dist = shortest_path(graph, directed=True, indices=0)  # shortest path from (0,0) to any point on the grid
 ans_15b = dist[-1]
