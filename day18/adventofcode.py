@@ -118,7 +118,7 @@ class Snailfish:
     def reduce(self):
         self._init_helpers()
         self._set_levels(self.fish)
-        self.to_split = [pos for pos in self.positions if type(self.get_position(pos)) != list and self.get_position(pos) > 9]
+        self.to_split = [p for p in self.positions if type(self.get_position(p)) != list and self.get_position(p) > 9]
         if self.to_explode:
             self.explode()
             self.keep_going = True
