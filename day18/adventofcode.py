@@ -137,7 +137,7 @@ for f in fish_b.copy():
         if this_magnitude > max_magnitude:
             print(f, other)
             print(f'MAGNITUDE: {this_magnitude} > {max_magnitude}')
-        max_magnitude = max(max_magnitude, this_magnitude)
+            max_magnitude = max(max_magnitude, this_magnitude)
 
 ans_18b = max_magnitude
 
