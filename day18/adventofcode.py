@@ -14,39 +14,28 @@ class Snailfish:
     def _init_helpers(self):
         self.carry_left = 0
         self.carry_right = 0
-        self.level_1 = []
-        self.level_2 = []
-        self.level_3 = []
-        self.level_4 = []
         self.positions = []
         self.to_explode = []
         self.to_split = []
         self.selected = False
         self.keep_going = False
 
-    def _set_levels(self, fish, level=1, index=None):
+    def find_positions(self, fish, level=1, index=None):
         index = [0] if index is None or level == 1 else index
         for i, x in enumerate(fish):
             index[-1] = i
             if type(x) != list:
                 self.positions += [index.copy()]
-                setattr(self, 'level_' + str(level), getattr(self, 'level_' + str(level)) + [x])
             else:
                 if level < 4:
-                    self._set_levels(x, level + 1, index=index + [i])
+                    self.find_positions(x, level + 1, index=index + [i])
                 else:
-                    self.level_4 += [x]
                     if not self.selected:
                         self.to_explode = index.copy()
                         self.positions += [self.to_explode]
-                        # self.positions += [index + [0]] + [index + [1]]
                         self.selected = True
                     else:
                         self.positions += [index + [0]] + [index + [1]]
-
-    def _get_levels(self):
-        for level in range(4):
-            print(f'Level {level + 1}:', getattr(self, 'level_' + str(level + 1)))
 
     def get_position(self, index):
         ix = len(index)
@@ -60,18 +49,6 @@ class Snailfish:
             return self.fish[index[0]][index[1]][index[2]][index[3]]
         if ix == 5:
             return self.fish[index[0]][index[1]][index[2]][index[3]][index[4]]
-
-    def get_left_of(self, index):
-        index = index if index in self.positions else index + [0]
-        pos = self.positions.index(index)
-        if pos > 0:
-            return self.get_position(self.positions[pos - 1])
-
-    def get_right_of(self, index):
-        index = index if index in self.positions else index + [1]
-        pos = self.positions.index(index)
-        if pos < len(self.positions):
-            return self.get_position(self.positions[self.positions.index(index) + 1])
 
     def set_position(self, index, val):
         ix = len(index)
@@ -117,7 +94,7 @@ class Snailfish:
 
     def reduce(self):
         self._init_helpers()
-        self._set_levels(self.fish)
+        self.find_positions(self.fish)
         self.to_split = [p for p in self.positions if type(self.get_position(p)) != list and self.get_position(p) > 9]
         if self.to_explode:
             self.explode()
@@ -150,30 +127,29 @@ class Snailfish:
         return 3 * self.magnitude_left(left) + 2 * self.magnitude_right(right)
 
 
+## 18a
 fish_a = deepcopy(fish)
 snailfish_hw = Snailfish(fish_a[0].copy())
 for f in fish_a[1:]:
     snailfish_hw.add_fish(f)
 
-## 18a
 ans_18a = snailfish_hw.magnitude()
 
+## 18b
 fish_b = deepcopy(fish)
 max_magnitude = 0
 for f in fish_b.copy():
     for other in [fsh for fsh in fish_b if fsh != f].copy():
-        print(f, other)
         snailfish_hw = Snailfish(deepcopy(f))
         snailfish_hw.add_fish(deepcopy(other))
         this_magnitude = snailfish_hw.magnitude()
-        if this_magnitude < max_magnitude:
-            print(f'MAGNITUDE: {this_magnitude} < {max_magnitude}')
-        else:
-            print(f'MAGNITUDE: {this_magnitude} >= {max_magnitude}')
+        if this_magnitude > max_magnitude:
+            print(f, other)
+            print(f'MAGNITUDE: {this_magnitude} > {max_magnitude}')
         max_magnitude = max(max_magnitude, this_magnitude)
 
-## 18b
 ans_18b = max_magnitude
+
 
 if __name__ == "__main__":
     print('Answer 18a:', ans_18a)
