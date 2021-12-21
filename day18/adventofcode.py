@@ -89,9 +89,6 @@ class Snailfish:
         val = self.get_position(self.to_split)
         self.set_position(self.to_split, [int(val//2), int(np.ceil(val/2))])
 
-    def add(self, fish):
-        self.fish = [self.fish] + [fish]
-
     def reduce(self):
         self._init_helpers()
         self.find_positions(self.fish)
@@ -107,24 +104,18 @@ class Snailfish:
             self.reduce()
 
     def add_fish(self, fish):
-        self.add(fish)
+        self.fish = [self.fish] + [fish]
         self.reduce()
 
-    def magnitude_left(self, left):
-        if type(left) != list:
-            return left
+    def _magnitude(self, lr):
+        if type(lr) != list:
+            return lr
         else:
-            return self.magnitude(left)
-
-    def magnitude_right(self, right):
-        if type(right) != list:
-            return right
-        else:
-            return self.magnitude(right)
+            return self.magnitude(lr)
 
     def magnitude(self, pair=None):
         left, right = pair if pair else self.fish
-        return 3 * self.magnitude_left(left) + 2 * self.magnitude_right(right)
+        return 3 * self._magnitude(left) + 2 * self._magnitude(right)
 
 
 ## 18a
