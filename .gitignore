@@ -1,3 +1,5 @@
 .idea/*
 adventofcode.py
 !*/adventofcode.py
+/2022/adventofcode.py
+!/2022/*/adventofcode.py
