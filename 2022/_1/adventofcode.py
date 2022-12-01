@@ -1,24 +1,12 @@
 import pandas as pd
 import os
 
-day = os.getcwd().split('/')[-1]
-with open('input.txt', 'r') as f:
-    data = [int(txt.replace('\n', '')) if txt != '\n' else '' for txt in f.readlines()]
+TESTING = False
 
-# data = [1000,
-#         2000,
-#         3000,
-#         '',
-#         4000,
-#         '',
-#         5000,
-#         6000,
-#         '',
-#         7000,
-#         8000,
-#         9000,
-#         '',
-#         10000]
+file = 'test.txt' if TESTING else 'input.txt'
+day = os.getcwd().split('/')[-1]
+with open(file, 'r') as f:
+    data = [int(txt.replace('\n', '')) if txt != '\n' else '' for txt in f.readlines()]
 
 ##a
 calories = data.copy()
@@ -26,7 +14,7 @@ chunks = []
 while calories:
     blank = calories.index('') if '' in calories else 100
     chunks += [sum(calories[:blank])]
-    calories = calories[blank+1:]
+    calories = calories[blank + 1:]
 ans_a = max(chunks)
 
 ##b
