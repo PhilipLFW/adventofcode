@@ -1,0 +1,66 @@
+# we start with largest possble input of 99999999999999 (w1 = ... = w14 = 9)
+inp w 1
+add z w
+add z 13  # z starts at 9, becomes 22, we can represent this as V in the alphabet (z=V)
+inp w 2
+mul z 26  # in base-26, V * 26 becomes V0, i.e. the digit of V shifts one to the left
+add z w
+add z 10  # the next digit of z is added as 9+10=19, represented as S (z=VS)
+inp w 3
+mul z 26
+add z w
+add z 3  # the next digit of z is added as 9+3=12, represented as L (z=VSL)
+inp w 4
+mul x 0
+add x z
+mod x 26  # x becomes z % 26, i.e. the last digit of z, i.e. L (12)
+div z 26
+add x -11  # w4 must be L-11=12-11, i.e. 1 (z=VS, last digit stripped! by making w4=L-11 the rest of the commands do not add a new digit to z)
+inp w 5
+add z w
+add z 9  # the next digit of z is added as 9+9=18, represented as R (z=VSR)
+inp w 6
+mul x 0
+add x z
+mod x 26
+div z 26
+add x -4  # w6 must be R-4=18-4, i.e. 14, but it must be <= 9! (-5), instead we make w5=4 (-5), so that previous digit of z is 4+9=13, represented as M, and w6 becomes M-4=9 (z=VS)
+inp w 7
+add z w
+add z 5  # the next digit of z is added as 9+5=14, represented as N (z=VSN)
+inp w 8
+add z w
+add z 1  # the next digit of z is added as 9+1=10, represented as J (z=VSNJ)
+inp w 9
+add z w  # the next digit of z is added as 9, represented as I (z=VSNJI)
+inp w 10
+mul x 0
+add x z
+mod x 26
+div z 26
+add x -2  # w10 must be I-2=9-2, i.e. 7 (z=VSNJ)
+inp w 11
+mul x 0
+add x z
+mod x 26
+div z 26
+add x -5  # w11 must be J-5=10-5, i.e. 5 (z=VSN)
+inp w 12
+mul x 0
+add x z
+mod x 26
+div z 26
+add x -11  # w12 must be N-11=14-11, i.e. 3 (z=VS)
+inp w 13
+mul x 0
+add x z
+mod x 26
+div z 26
+add x -13  # w13 must be S-13=19-13, i.e. 6 (z=V)
+inp w 14
+mul x 0
+add x z
+mod x 26
+div z 26
+add x -10  # w14 must be V-10=22-10, i.e. 12, but it must be <= 9! (-3), instead we make w1=6 (-3) (this is where V was added), so that previous digit of z is 13+6=19, represented as S, and w14 becomes M-4=9 (z=0)
+# final largest possible input is 69914999975369

@@ -1,0 +1,66 @@
+# we start with smallest possble input of 11111111111111 (w1 = ... = w14 = 1)
+inp w 1
+add z w
+add z 13  # z starts at 1+13=14, represented as N (z=N)
+inp w 2
+mul z 26
+add z w
+add z 10  # the next digit of z is added as 1+10=11, represented as K (z=NK)
+inp w 3
+mul z 26
+add z w
+add z 3  # the next digit of z is added as 1+3=4, represented as L (z=NKD)
+inp w 4
+mul x 0
+add x z
+mod x 26  # x becomes z % 26, i.e. the last digit of z, i.e. D (4)
+div z 26
+add x -11  # w4 must be D-11=4-11, i.e. -7, but it must be >= 1! (+8), instead we make w3=9 (+8), so that previous digit of z is 9+3=12, represented as L, and w4 becomes L-11=1 (z=NK)
+inp w 5
+add z w
+add z 9  # the next digit of z is added as 1+9=10, represented as J (z=NKJ)
+inp w 6
+mul x 0
+add x z
+mod x 26
+div z 26
+add x -4  # w6 must be J-4=10-4, i.e. 6 (z=NK)
+inp w 7
+add z w
+add z 5  # the next digit of z is added as 1+5=6, represented as F (z=NKF)
+inp w 8
+add z w
+add z 1  # the next digit of z is added as 1+1=2, represented as B (z=NKFB)
+inp w 9
+add z w  # the next digit of z is added as 1, represented as A (z=NKFBA)
+inp w 10
+mul x 0
+add x z
+mod x 26
+div z 26
+add x -2  # w10 must be A-2=1-2, i.e. -1, but it must be >= 1! (+2), instead we make w9=3 (+2) (z=NKFB)
+inp w 11
+mul x 0
+add x z
+mod x 26
+div z 26
+add x -5  # w11 must be B-5=2-5, i.e. -3, but it must be >= 1! (+4), instead we make w8=5 (+4) (this is where B was added) (z=NKF)
+inp w 12
+mul x 0
+add x z
+mod x 26
+div z 26
+add x -11  # w12 must be F-11=6-11, i.e. -5, but it must be >= 1! (+6), instead we make w7=7 (+6) (this is where F was added) (z=NK)
+inp w 13
+mul x 0
+add x z
+mod x 26
+div z 26
+add x -13  # w13 must be K-13=11-13, i.e. -2, but it must be >= 1! (+3), instead we make w2=4 (+3) (this is where K was added) (z=N)
+inp w 14
+mul x 0
+add x z
+mod x 26
+div z 26
+add x -10  # w14 must be N-10=14-10, i.e. 4 (z=0)
+# final smallest possible input is 14911675311114
