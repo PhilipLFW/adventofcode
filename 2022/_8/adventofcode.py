@@ -6,7 +6,7 @@ TESTING = False
 
 file = 'test.txt' if TESTING else 'input.txt'
 day = os.getcwd().split('/')[-1]
-data = np.genfromtxt(file, dtype=int, comments='|||', delimiter=1)
+data = np.genfromtxt(file, dtype=int, delimiter=1)
 
 ##a
 rows, cols = data.shape
@@ -16,7 +16,7 @@ for x in range(rows):
         height = data[x, y]
 
         # check if a tree is on the edge
-        _edge = (x == 0 or y == 0 or x == rows - 1 or y == rows - 1)
+        _edge = (x == 0 or y == 0 or x == rows - 1 or y == cols - 1)
 
         # check if all trees on a particular side are smaller
         _left = np.all(data[x, :y] < height)
