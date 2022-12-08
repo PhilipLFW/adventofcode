@@ -32,8 +32,8 @@ ans_a = np.sum(visible)
 
 ##b
 scenic_score = np.ones_like(data)
-for x in range(rows - 1):
-    for y in range(cols - 1):
+for x in range(rows):
+    for y in range(cols):
         if x == 0 or y == 0 or x == rows - 1 or y == cols - 1:
             scenic_score[x, y] = 0
             continue
