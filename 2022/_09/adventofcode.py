@@ -18,9 +18,9 @@ def print_image(df):
     """use for testing"""
     print(str(df).replace(' [', '').replace('[', '').replace(']', '').replace('\n  ', ' ').replace('\'', '') + '\n')
 
+directions = {'R': np.array([0, 1]), 'U': np.array([-1, 0]), 'D': np.array([1, 0]), 'L': np.array([0, -1])}
 
 ##a
-directions = {'R': np.array([0, 1]), 'U': np.array([-1, 0]), 'D': np.array([1, 0]), 'L': np.array([0, -1])}
 T_visited = {(0, 0)}
 T_loc = np.array([0, 0])
 H_loc = np.array([0, 0])
@@ -36,7 +36,6 @@ for direction in data:
 ans_a = len(T_visited)
 
 ##b
-directions = {'R': np.array([0, 1]), 'U': np.array([-1, 0]), 'D': np.array([1, 0]), 'L': np.array([0, -1])}
 T_visited = {(0, 0)}
 locs = {k: np.array([0, 0]) for k in range(10)}
 data = data_b.copy()
