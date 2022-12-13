@@ -86,16 +86,16 @@ ans_b = np.prod(dividers)
 
 # Clean
 res = {0: 1, 1: 2}
-data = [x for x in data if x]
 for j in range(2):
     for i in range((len(data))):
-        print(f'== Packet {i + 1} ==')
-        left = eval(data[i])
-        right = [[2]] if not j else [[6]]
-        print('Compare:', left, 'vs', right)
-        if compare_pairs(left, right):
-            res[j] += 1
-        print('\n')
+        if data[i]:
+            print(f'== Packet {i + 1} ==')
+            left = eval(data[i])
+            right = [[2]] if not j else [[6]]
+            print('Compare:', left, 'vs', right)
+            if compare_pairs(left, right):
+                res[j] += 1
+            print('\n')
 
 ans_b = np.prod([x for x in res.values()])
 
