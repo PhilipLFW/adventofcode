@@ -79,16 +79,12 @@ for i in range((len(data) + 1) // 3):
 ans_a = sum(res)
 
 ##b
-"""
-Fixed this hack, much more efficient
-packets = pd.DataFrame()
-packets['original'] = [x for x in data + ['[[2]]', '[[6]]'] if x]
-packets['replaced'] = [x.replace('10', 'X').replace('[', '').replace(']', '') for x in packets['original']]
-sorted_packets = packets.sort_values('replaced')
-dividers = [list(sorted_packets['original']).index('[[2]]') + 1, list(sorted_packets['original']).index('[[6]]') + 1]
+# Hack
+sort_packets = sorted([x.replace('[', '').replace(']', '').replace('10', 'X') for x in data + ['[[2]]', '[[6]]'] if x])
+dividers = [sort_packets.index('2') + 1, sort_packets.index('6') + 1]
 ans_b = np.prod(dividers)
-"""
 
+# Clean
 res = {0: 1, 1: 2}
 data = [x for x in data if x]
 for j in range(2):
