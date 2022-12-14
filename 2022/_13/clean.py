@@ -56,25 +56,11 @@ ans_a = sum(res)
 
 
 ##b
-# Hack
 sort_packets = sorted([x.replace('[', '').replace(']', '').replace('10', 'X') for x in data + ['[[2]]', '[[6]]'] if x])
 dividers = [sort_packets.index('2') + 1, sort_packets.index('6') + 1]
+
 ans_b = np.prod(dividers)
 
-# Clean
-res = {0: 1, 1: 2}
-for j in range(2):
-    for i in range((len(data))):
-        if data[i]:
-            print(f'== Packet {i + 1} ==')
-            left = eval(data[i])
-            right = [[2]] if not j else [[6]]
-            print('Compare:', left, 'vs', right)
-            if compare_pairs(left, right):
-                res[j] += 1
-            print('\n')
-
-ans_b = np.prod([x for x in res.values()])
 
 if __name__ == "__main__":
     print(f'Answer {day[-2]}a:', ans_a)
