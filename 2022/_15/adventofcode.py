@@ -26,12 +26,11 @@ ans_a = len(no_beacon)
 
 ##b
 space = 20 if TESTING else 4000000
-candidates = {(0, 0), (0, space), (space, 0), (space, space)}
+candidates = {(0, 0), (0, space), (space, 0), (space, space)}  # corners are candidate solutions
+# beacon can not be more than 1 outside of a sensors range, otherwise 1 step closer would be a candidate solution
+# draw lines on the outside of the range where there can be no beacon (i.e. dist + 1)
 for i, ((sx, sy), dist) in enumerate(zip(sensors, distances)):
-    print(i + 1, len(sensors))
-    # beacon can not be more than 1 outside of a sensors range, otherwise 1 step closer would be a candidate solution
-    # draw lines on the outside of the range where there can be no beacon (i.e. dist + 1)
-    dist += 1
+    dist += 1  # we check one unit outside of border
     top = (sx - dist, sy)
     bottom = (sx + dist, sy)
     left = (sx, sy - dist)
@@ -42,15 +41,17 @@ for i, ((sx, sy), dist) in enumerate(zip(sensors, distances)):
             if 0 <= x < space and 0 <= y < space:
                 candidates |= {(x, y)}
 
+res = ()
 for i, (cx, cy) in enumerate(candidates.copy()):
-    if not i % 200000:
+    if not i % 100000:
         print(i, len(candidates))
-    for (sx, sy), dist in zip(sensors, distances):
-        this_dist = abs(cx - sx) + abs(cy - sy)
-        if this_dist <= dist:
-            candidates -= {(cx, cy)}
+    this_distances = [abs(sx - cx) + abs(sy - cy) for (sx, sy) in sensors]
+    if any([this <= that for this, that in zip(this_distances, distances)]):
+        candidates -= {(cx, cy)}
+    else:
+        res = (cx, cy)
+        break
 
-res = list(candidates)[0] if len(candidates) == 1 else 'ERROR'
 ans_b = res[0] * 4000000 + res[1]
 
 if __name__ == "__main__":
