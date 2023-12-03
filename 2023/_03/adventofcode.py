@@ -11,7 +11,7 @@ data = np.pad(data, 1, 'constant', constant_values='.')
 
 numbers = []
 part_numbers = []
-gears = {(x,y): [] for x, y in zip(*np.where(data == '*'))}  # part 2
+gears = {(x, y): [] for x, y in zip(*np.where(data == '*'))}  # part 2
 
 rows, cols = data.shape
 current_num = ''
@@ -26,13 +26,13 @@ for i in range(rows):
             current_num += char
         elif current_num:
             numbers += [int(current_num)]
-            end_col = j-1
+            end_col = j - 1
             current_num = ''
         else:
             continue
         if start_col and end_col:
-            res = data[i-1:i+2, start_col-1:end_col+2].copy()
-            res[1:-1, 1:-1] = '.' # replace the number
+            res = data[i - 1:i + 2, start_col - 1:end_col + 2].copy()
+            res[1:-1, 1:-1] = '.'  # replace the number
             if not np.all(res == '.'):
                 part_numbers += [numbers[-1]]
             for r, c in np.ndindex(res.shape):  # part 2
