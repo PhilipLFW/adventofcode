@@ -11,7 +11,7 @@ data = np.pad(data, 1, 'constant', constant_values='.')
 
 numbers = []
 part_numbers = []
-gears = {(x,y): [] for x, y in zip(*np.where(data == '*'))}
+gears = {(x,y): [] for x, y in zip(*np.where(data == '*'))}  # part 2
 
 rows, cols = data.shape
 current_num = ''
@@ -35,7 +35,7 @@ for i in range(rows):
             res[1:-1, 1:-1] = '.' # replace the number
             if not np.all(res == '.'):
                 part_numbers += [numbers[-1]]
-            for r, c in np.ndindex(res.shape):
+            for r, c in np.ndindex(res.shape):  # part 2
                 if res[r, c] == '*':
                     gears[(i - 1 + r, start_col - 1 + c)] += [numbers[-1]]
             start_col = None
