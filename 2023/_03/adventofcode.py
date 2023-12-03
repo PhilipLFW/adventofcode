@@ -48,5 +48,5 @@ ans_a = sum(part_numbers)
 ans_b = sum([np.product(v) for k, v in gears.items() if len(v) == 2])
 
 if __name__ == "__main__":
-    print(f'Answer {day[-2]}a:', ans_a)
-    print(f'Answer {day[-2]}b:', ans_b)
+    print(f'Answer {day}a:', ans_a)
+    print(f'Answer {day}b:', ans_b)
