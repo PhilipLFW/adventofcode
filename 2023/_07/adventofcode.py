@@ -14,6 +14,26 @@ cards = [x.split()[0] for x in data]
 bids = [int(x.split()[1]) for x in data]
 
 
+def hand_strength(cards, joker=False):
+    # count initial cards in hand
+    counter = [Counter(hand) for hand in cards]
+
+    if joker:
+        # replace J by most common card (unless most common card is J and J is not the only card)
+        # else replace J by second most common card
+        counter = [Counter(hand) for hand in
+                   [c.replace('J',
+                              counts.most_common()[0][0] if not counts.most_common()[0][0] == 'J' or len(counts) == 1
+                              else
+                              counts.most_common()[1][0])
+                    for c, counts in zip(cards, counter)]]
+
+    # convert to str: possible hand strengths 5, 41, 32, 311, 221, 2111, 1111
+    strength = [''.join([str(x) for x in sorted(list(counts.values()))[::-1]]) for counts in counter]
+
+    return strength
+
+
 def play_game(cards, bids, joker=False):
     # determine sort values
     if not joker:
@@ -40,33 +60,15 @@ def play_game(cards, bids, joker=False):
     hands['rank'] = hands.index + 1
     hands['winnings'] = hands['bid'] * hands['rank']
 
-    return hands
+    return hands['winnings'].sum()
 
-
-def hand_strength(cards, joker=False):
-    # count initial cards in hand
-    counter = [Counter(hand) for hand in cards]
-
-    if joker:
-        # replace J by most common card (unless most common card is J and J is not the only card)
-        # else replace J by second most common card
-        counter = [Counter(hand) for hand in
-                   [c.replace('J',
-                              counts.most_common()[0][0] if not counts.most_common()[0][0] == 'J' or len(counts) == 1
-                              else
-                              counts.most_common()[1][0])
-                    for c, counts in zip(cards, counter)]]
-
-    # convert to str: possible hand strengths 5, 41, 32, 311, 221, 2111, 1111
-    strength = [''.join([str(x) for x in sorted(list(counts.values()))[::-1]]) for counts in counter]
-
-    return strength
 
 ##a
-ans_a = play_game(cards, bids, joker=False)['winnings'].sum()
+ans_a = play_game(cards, bids, joker=False)
 
 ##b
-ans_b = play_game(cards, bids, joker=True)['winnings'].sum()
+ans_b = play_game(cards, bids, joker=True)
+
 
 if __name__ == "__main__":
     print(f'Answer {day}a:', ans_a)
