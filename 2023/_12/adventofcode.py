@@ -15,29 +15,7 @@ with open(file, 'r') as f:
     data = [txt.replace('\n', '') for txt in f.readlines()]
 
 springs = [x.split()[0] for x in data]
-orders = [[int(z) for z in x.split()[1].split(',')] for x in data]
-
-##a
-
-@cache
-def _get_all_springs(n):
-    return [''.join(x) for x in set(product('.#', repeat=n))]
-
-score = 0
-for i, (spring, order) in enumerate(zip(springs, orders)):
-    print(f'{i} / {len(springs)}')
-    all_springs = _get_all_springs(len(spring))
-    valid_springs = [s for s in all_springs if ''.join([x if x == '?' else y for x,y in zip(spring, s)]) == spring]
-    valid_orders = [s for s in valid_springs if [len(z) for z in s.replace('.', ' ').split()] == order]
-    score += len(valid_orders)
-
-ans_a = score
-
-
-## b
-springs = ['?'.join([s] * 5) for s in springs]
-orders = [','.join([str(z) for z in o * 5]) for o in orders]
-
+orders = [x.split()[1] for x in data]
 
 @cache
 def rep_spring(spring, order, cut='', cut_order=''):
@@ -79,15 +57,27 @@ def rep_spring(spring, order, cut='', cut_order=''):
     else:
         return 0
 
-
+##a
 score = 0
-my_scores = []
 for i, (spring, order) in enumerate(zip(springs, orders)):
     print(f'{i + 1} / {len(orders)}')
     arrangements = rep_spring(spring, order)
     print(f'Total score: {arrangements}')
     score += arrangements
-    my_scores += [arrangements]
+
+ans_a = score
+
+
+## b
+springs = ['?'.join([s] * 5) for s in springs]
+orders = [','.join([o] * 5) for o in orders]
+
+score = 0
+for i, (spring, order) in enumerate(zip(springs, orders)):
+    print(f'{i + 1} / {len(orders)}')
+    arrangements = rep_spring(spring, order)
+    print(f'Total score: {arrangements}')
+    score += arrangements
 
 ans_b = score
 
